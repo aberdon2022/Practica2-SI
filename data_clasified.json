@@ -1,0 +1,994 @@
+{
+  "tickets_emitidos": [
+    {
+      "cliente": "7",
+      "fecha_apertura": "2025-04-15",
+      "fecha_cierre": "2025-04-18",
+      "es_mantenimiento": false,
+      "satisfaccion_cliente": 6,
+      "tipo_incidencia": 3,
+      "es_critico": false,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "103",
+          "fecha": "2025-04-16",
+          "tiempo": 2.5
+        },
+        {
+          "id_emp": "112",
+          "fecha": "2025-04-17",
+          "tiempo": 1.8
+        }
+      ]
+    },
+    {
+      "cliente": "2",
+      "fecha_apertura": "2025-05-10",
+      "fecha_cierre": "2025-05-12",
+      "es_mantenimiento": true,
+      "satisfaccion_cliente": 9,
+      "tipo_incidencia": 1,
+      "es_critico": false,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "105",
+          "fecha": "2025-05-11",
+          "tiempo": 3.2
+        }
+      ]
+    },
+    {
+      "cliente": "5",
+      "fecha_apertura": "2025-06-22",
+      "fecha_cierre": "2025-06-25",
+      "es_mantenimiento": true,
+      "satisfaccion_cliente": 4,
+      "tipo_incidencia": 4,
+      "es_critico": true,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "110",
+          "fecha": "2025-06-23",
+          "tiempo": 1.5
+        },
+        {
+          "id_emp": "114",
+          "fecha": "2025-06-24",
+          "tiempo": 2.0
+        }
+      ]
+    },
+    {
+      "cliente": "9",
+      "fecha_apertura": "2025-07-03",
+      "fecha_cierre": "2025-07-05",
+      "es_mantenimiento": true,
+      "satisfaccion_cliente": 7,
+      "tipo_incidencia": 2,
+      "es_critico": true,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "101",
+          "fecha": "2025-07-04",
+          "tiempo": 3.7
+        }
+      ]
+    },
+    {
+      "cliente": "1",
+      "fecha_apertura": "2025-08-14",
+      "fecha_cierre": "2025-08-16",
+      "es_mantenimiento": false,
+      "satisfaccion_cliente": 8,
+      "tipo_incidencia": 5,
+      "es_critico": false,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "107",
+          "fecha": "2025-08-15",
+          "tiempo": 2.3
+        },
+        {
+          "id_emp": "113",
+          "fecha": "2025-08-15",
+          "tiempo": 1.9
+        }
+      ]
+    },
+    {
+      "cliente": "3",
+      "fecha_apertura": "2025-04-20",
+      "fecha_cierre": "2025-04-22",
+      "es_mantenimiento": true,
+      "satisfaccion_cliente": 5,
+      "tipo_incidencia": 2,
+      "es_critico": true,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "104",
+          "fecha": "2025-04-21",
+          "tiempo": 2.1
+        }
+      ]
+    },
+    {
+      "cliente": "8",
+      "fecha_apertura": "2025-05-05",
+      "fecha_cierre": "2025-05-07",
+      "es_mantenimiento": false,
+      "satisfaccion_cliente": 7,
+      "tipo_incidencia": 3,
+      "es_critico": false,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "108",
+          "fecha": "2025-05-06",
+          "tiempo": 1.7
+        }
+      ]
+    },
+    {
+      "cliente": "4",
+      "fecha_apertura": "2025-06-10",
+      "fecha_cierre": "2025-06-12",
+      "es_mantenimiento": true,
+      "satisfaccion_cliente": 6,
+      "tipo_incidencia": 4,
+      "es_critico": true,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "111",
+          "fecha": "2025-06-11",
+          "tiempo": 3.0
+        }
+      ]
+    },
+    {
+      "cliente": "10",
+      "fecha_apertura": "2025-07-15",
+      "fecha_cierre": "2025-07-17",
+      "es_mantenimiento": false,
+      "satisfaccion_cliente": 9,
+      "tipo_incidencia": 1,
+      "es_critico": false,
+      "contactos_con_empleados": [
+        {
+          "id_emp": "115",
+          "fecha": "2025-07-16",
+          "tiempo": 2.4
+        }
+      ]
+    },
+    {
+        "cliente": "7",
+        "fecha_apertura": "2025-04-15",
+        "fecha_cierre": "2025-04-18",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 3,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "103",
+                "fecha": "2025-04-16",
+                "tiempo": 2.5
+            },
+            {
+                "id_emp": "112",
+                "fecha": "2025-04-17",
+                "tiempo": 1.8
+            }
+        ]
+    },
+    {
+        "cliente": "2",
+        "fecha_apertura": "2025-05-10",
+        "fecha_cierre": "2025-05-12",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 9,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "105",
+                "fecha": "2025-05-11",
+                "tiempo": 3.2
+            }
+        ]
+    },
+    {
+        "cliente": "5",
+        "fecha_apertura": "2025-06-22",
+        "fecha_cierre": "2025-06-25",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 4,
+        "tipo_incidencia": 4,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "110",
+                "fecha": "2025-06-23",
+                "tiempo": 1.5
+            },
+            {
+                "id_emp": "114",
+                "fecha": "2025-06-24",
+                "tiempo": 2.0
+            }
+        ]
+    },
+    {
+        "cliente": "9",
+        "fecha_apertura": "2025-07-03",
+        "fecha_cierre": "2025-07-05",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 2,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "101",
+                "fecha": "2025-07-04",
+                "tiempo": 3.7
+            }
+        ]
+    },
+    {
+        "cliente": "1",
+        "fecha_apertura": "2025-08-14",
+        "fecha_cierre": "2025-08-16",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 8,
+        "tipo_incidencia": 5,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "107",
+                "fecha": "2025-08-15",
+                "tiempo": 2.3
+            },
+            {
+                "id_emp": "113",
+                "fecha": "2025-08-15",
+                "tiempo": 1.9
+            }
+        ]
+    },
+    {
+        "cliente": "3",
+        "fecha_apertura": "2025-04-20",
+        "fecha_cierre": "2025-04-22",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 5,
+        "tipo_incidencia": 2,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "104",
+                "fecha": "2025-04-21",
+                "tiempo": 2.1
+            }
+        ]
+    },
+    {
+        "cliente": "8",
+        "fecha_apertura": "2025-05-05",
+        "fecha_cierre": "2025-05-07",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 3,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "108",
+                "fecha": "2025-05-06",
+                "tiempo": 1.7
+            }
+        ]
+    },
+    {
+        "cliente": "4",
+        "fecha_apertura": "2025-06-10",
+        "fecha_cierre": "2025-06-12",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 4,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "111",
+                "fecha": "2025-06-11",
+                "tiempo": 3.0
+            }
+        ]
+    },
+    {
+        "cliente": "10",
+        "fecha_apertura": "2025-07-15",
+        "fecha_cierre": "2025-07-17",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 9,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "115",
+                "fecha": "2025-07-16",
+                "tiempo": 2.4
+            }
+        ]
+    },
+    {
+        "cliente": "6",
+        "fecha_apertura": "2025-08-01",
+        "fecha_cierre": "2025-08-03",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 3,
+        "tipo_incidencia": 5,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "102",
+                "fecha": "2025-08-02",
+                "tiempo": 1.2
+            }
+        ]
+    },
+    {
+        "cliente": "4",
+        "fecha_apertura": "2025-09-01",
+        "fecha_cierre": "2025-09-03",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 3,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "106",
+                "fecha": "2025-09-02",
+                "tiempo": 2.8
+            }
+        ]
+    },
+    {
+        "cliente": "9",
+        "fecha_apertura": "2025-09-10",
+        "fecha_cierre": "2025-09-12",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 8,
+        "tipo_incidencia": 2,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "109",
+                "fecha": "2025-09-11",
+                "tiempo": 1.6
+            }
+        ]
+    },
+    {
+        "cliente": "2",
+        "fecha_apertura": "2025-09-15",
+        "fecha_cierre": "2025-09-17",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 4,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "110",
+                "fecha": "2025-09-16",
+                "tiempo": 3.1
+            }
+        ]
+    },
+    {
+        "cliente": "5",
+        "fecha_apertura": "2025-09-20",
+        "fecha_cierre": "2025-09-22",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 5,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "112",
+                "fecha": "2025-09-21",
+                "tiempo": 2.0
+            }
+        ]
+    },
+    {
+        "cliente": "7",
+        "fecha_apertura": "2025-09-25",
+        "fecha_cierre": "2025-09-27",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 9,
+        "tipo_incidencia": 5,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "114",
+                "fecha": "2025-09-26",
+                "tiempo": 1.9
+            }
+        ]
+    },
+    {
+        "cliente": "1",
+        "fecha_apertura": "2025-10-01",
+        "fecha_cierre": "2025-10-03",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 2,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "101",
+                "fecha": "2025-10-02",
+                "tiempo": 2.5
+            }
+        ]
+    },
+    {
+        "cliente": "3",
+        "fecha_apertura": "2025-10-05",
+        "fecha_cierre": "2025-10-07",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 8,
+        "tipo_incidencia": 3,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "103",
+                "fecha": "2025-10-06",
+                "tiempo": 1.7
+            }
+        ]
+    },
+    {
+        "cliente": "6",
+        "fecha_apertura": "2025-10-10",
+        "fecha_cierre": "2025-10-12",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 4,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "105",
+                "fecha": "2025-10-11",
+                "tiempo": 3.0
+            }
+        ]
+    },
+    {
+        "cliente": "8",
+        "fecha_apertura": "2025-10-15",
+        "fecha_cierre": "2025-10-17",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 4,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "107",
+                "fecha": "2025-10-16",
+                "tiempo": 2.2
+            }
+        ]
+    },
+    {
+        "cliente": "10",
+        "fecha_apertura": "2025-10-20",
+        "fecha_cierre": "2025-10-22",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 9,
+        "tipo_incidencia": 5,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "109",
+                "fecha": "2025-10-21",
+                "tiempo": 1.8
+            }
+        ]
+    },
+    {
+        "cliente": "4",
+        "fecha_apertura": "2025-10-25",
+        "fecha_cierre": "2025-10-27",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 5,
+        "tipo_incidencia": 2,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "111",
+                "fecha": "2025-10-26",
+                "tiempo": 2.9
+            }
+        ]
+    },
+    {
+        "cliente": "7",
+        "fecha_apertura": "2025-11-01",
+        "fecha_cierre": "2025-11-03",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 3,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "113",
+                "fecha": "2025-11-02",
+                "tiempo": 1.5
+            }
+        ]
+    },
+    {
+        "cliente": "2",
+        "fecha_apertura": "2025-11-05",
+        "fecha_cierre": "2025-11-07",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 4,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "115",
+                "fecha": "2025-11-06",
+                "tiempo": 3.3
+            }
+        ]
+    },
+    {
+        "cliente": "5",
+        "fecha_apertura": "2025-11-10",
+        "fecha_cierre": "2025-11-12",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 8,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "102",
+                "fecha": "2025-11-11",
+                "tiempo": 2.4
+            }
+        ]
+    },
+    {
+        "cliente": "9",
+        "fecha_apertura": "2025-11-15",
+        "fecha_cierre": "2025-11-17",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 9,
+        "tipo_incidencia": 5,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "104",
+                "fecha": "2025-11-16",
+                "tiempo": 1.9
+            }
+        ]
+    },
+    {
+        "cliente": "1",
+        "fecha_apertura": "2025-11-20",
+        "fecha_cierre": "2025-11-22",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 4,
+        "tipo_incidencia": 2,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "106",
+                "fecha": "2025-11-21",
+                "tiempo": 2.7
+            }
+        ]
+    },
+    {
+        "cliente": "3",
+        "fecha_apertura": "2025-11-25",
+        "fecha_cierre": "2025-11-27",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 5,
+        "tipo_incidencia": 3,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "108",
+                "fecha": "2025-11-26",
+                "tiempo": 1.6
+            }
+        ]
+    },
+    {
+        "cliente": "6",
+        "fecha_apertura": "2025-12-01",
+        "fecha_cierre": "2025-12-03",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 4,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "110",
+                "fecha": "2025-12-02",
+                "tiempo": 3.0
+            }
+        ]
+    },
+    {
+        "cliente": "8",
+        "fecha_apertura": "2025-12-05",
+        "fecha_cierre": "2025-12-07",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "112",
+                "fecha": "2025-12-06",
+                "tiempo": 2.1
+            }
+        ]
+    },
+    {
+        "cliente": "10",
+        "fecha_apertura": "2025-12-10",
+        "fecha_cierre": "2025-12-12",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 8,
+        "tipo_incidencia": 5,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "114",
+                "fecha": "2025-12-11",
+                "tiempo": 1.8
+            }
+        ]
+    },
+    {
+        "cliente": "4",
+        "fecha_apertura": "2025-12-15",
+        "fecha_cierre": "2025-12-17",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 9,
+        "tipo_incidencia": 2,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "101",
+                "fecha": "2025-12-16",
+                "tiempo": 2.9
+            }
+        ]
+    },
+    {
+        "cliente": "7",
+        "fecha_apertura": "2025-12-20",
+        "fecha_cierre": "2025-12-22",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 5,
+        "tipo_incidencia": 3,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "103",
+                "fecha": "2025-12-21",
+                "tiempo": 1.7
+            }
+        ]
+    },
+    {
+        "cliente": "2",
+        "fecha_apertura": "2025-12-25",
+        "fecha_cierre": "2025-12-27",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 4,
+        "es_critico": true,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "105",
+                "fecha": "2025-12-26",
+                "tiempo": 3.2
+            }
+        ]
+    },
+    {
+        "cliente": "5",
+        "fecha_apertura": "2025-12-30",
+        "fecha_cierre": "2026-01-01",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+            {
+                "id_emp": "107",
+                "fecha": "2025-12-31",
+                "tiempo": 2.3
+            }
+        ]
+    },
+    {
+        "cliente": "3",
+        "fecha_apertura": "2025-01-05",
+        "fecha_cierre": "2025-01-08",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 2,
+        "es_critico": true,
+        "contactos_con_empleados": [
+          {
+            "id_emp": "106",
+            "fecha": "2025-01-06",
+            "tiempo": 2.0
+          }
+        ]
+      },
+      {
+        "cliente": "8",
+        "fecha_apertura": "2025-02-10",
+        "fecha_cierre": "2025-02-12",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 9,
+        "tipo_incidencia": 1,
+        "es_critico": false,
+        "contactos_con_empleados": [
+          {
+            "id_emp": "108",
+            "fecha": "2025-02-11",
+            "tiempo": 1.5
+          }
+        ]
+      },
+      {
+        "cliente": "4",
+        "fecha_apertura": "2025-03-15",
+        "fecha_cierre": "2025-03-18",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 6,
+        "tipo_incidencia": 4,
+        "es_critico": true,
+        "contactos_con_empleados": [
+          {
+            "id_emp": "110",
+            "fecha": "2025-03-16",
+            "tiempo": 3.0
+          }
+        ]
+      },
+      {
+        "cliente": "10",
+        "fecha_apertura": "2025-04-20",
+        "fecha_cierre": "2025-04-22",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 8,
+        "tipo_incidencia": 3,
+        "es_critico": false,
+        "contactos_con_empleados": [
+          {
+            "id_emp": "112",
+            "fecha": "2025-04-21",
+            "tiempo": 2.2
+          }
+        ]
+      },
+      {
+        "cliente": "6",
+        "fecha_apertura": "2025-05-25",
+        "fecha_cierre": "2025-05-27",
+        "es_mantenimiento": true,
+        "satisfaccion_cliente": 5,
+        "tipo_incidencia": 5,
+        "es_critico": true,
+        "contactos_con_empleados": [
+          {
+            "id_emp": "114",
+            "fecha": "2025-05-26",
+            "tiempo": 1.8
+          }
+        ]
+      },
+      {
+        "cliente": "2",
+        "fecha_apertura": "2025-06-30",
+        "fecha_cierre": "2025-07-02",
+        "es_mantenimiento": false,
+        "satisfaccion_cliente": 7,
+        "tipo_incidencia": 2,
+        "es_critico": false,
+        "contactos_con_empleados": [
+          {
+            "id_emp": "101",
+            "fecha": "2025-07-01",
+            "tiempo": 2.5
+          }
+        ]
+      }
+  ],
+  "clientes": [
+    {
+      "id_cli": "1",
+      "nombre": "Tech Solutions S.A.",
+      "telefono": "600123456",
+      "provincia": "Madrid"
+    },
+    {
+      "id_cli": "2",
+      "nombre": "Innovative Systems SL",
+      "telefono": "600654321",
+      "provincia": "Barcelona"
+    },
+    {
+      "id_cli": "3",
+      "nombre": "Global Enterprises Ltd.",
+      "telefono": "600987654",
+      "provincia": "Valencia"
+    },
+    {
+      "id_cli": "4",
+      "nombre": "Advanced Technologies Inc.",
+      "telefono": "600456789",
+      "provincia": "Sevilla"
+    },
+    {
+      "id_cli": "5",
+      "nombre": "Smart Solutions Co.",
+      "telefono": "600321654",
+      "provincia": "Zaragoza"
+    },
+    {
+      "id_cli": "6",
+      "nombre": "Future Innovations LLC",
+      "telefono": "600654987",
+      "provincia": "Bilbao"
+    },
+    {
+      "id_cli": "7",
+      "nombre": "Tech Innovators GmbH",
+      "telefono": "600789123",
+      "provincia": "Málaga"
+    },
+    {
+      "id_cli": "8",
+      "nombre": "NextGen Solutions Ltd.",
+      "telefono": "600123789",
+      "provincia": "Murcia"
+    },
+    {
+      "id_cli": "9",
+      "nombre": "Pioneer Technologies S.A.",
+      "telefono": "600987321",
+      "provincia": "Granada"
+    },
+    {
+      "id_cli": "10",
+      "nombre": "Creative Solutions SL",
+      "telefono": "600456123",
+      "provincia": "Alicante"
+    }
+  ],
+  "empleados": [
+    {
+      "id_emp": "101",
+      "nombre": "Juan Pérez",
+      "nivel": 1,
+      "fecha_contrato": "2020-05-10"
+    },
+    {
+      "id_emp": "102",
+      "nombre": "Ana Martínez",
+      "nivel": 1,
+      "fecha_contrato": "2021-03-15"
+    },
+    {
+      "id_emp": "103",
+      "nombre": "Luis Fernández",
+      "nivel": 2,
+      "fecha_contrato": "2019-11-20"
+    },
+    {
+      "id_emp": "104",
+      "nombre": "Laura Sánchez",
+      "nivel": 2,
+      "fecha_contrato": "2022-01-10"
+    },
+    {
+      "id_emp": "105",
+      "nombre": "Pedro Gómez",
+      "nivel": 3,
+      "fecha_contrato": "2018-07-25"
+    },
+    {
+      "id_emp": "106",
+      "nombre": "Carmen Rodríguez",
+      "nivel": 1,
+      "fecha_contrato": "2023-02-14"
+    },
+    {
+      "id_emp": "107",
+      "nombre": "Miguel Torres",
+      "nivel": 2,
+      "fecha_contrato": "2021-08-30"
+    },
+    {
+      "id_emp": "108",
+      "nombre": "Elena Morales",
+      "nivel": 3,
+      "fecha_contrato": "2017-12-05"
+    },
+    {
+      "id_emp": "109",
+      "nombre": "Raúl López",
+      "nivel": 1,
+      "fecha_contrato": "2024-04-22"
+    },
+    {
+      "id_emp": "110",
+      "nombre": "Patricia Díaz",
+      "nivel": 2,
+      "fecha_contrato": "2020-09-18"
+    },
+    {
+      "id_emp": "111",
+      "nombre": "Sergio Ruiz",
+      "nivel": 3,
+      "fecha_contrato": "2016-06-11"
+    },
+    {
+      "id_emp": "112",
+      "nombre": "Isabel Jiménez",
+      "nivel": 1,
+      "fecha_contrato": "2023-11-01"
+    },
+    {
+      "id_emp": "113",
+      "nombre": "David García",
+      "nivel": 2,
+      "fecha_contrato": "2019-03-27"
+    },
+    {
+      "id_emp": "114",
+      "nombre": "Rosa Martín",
+      "nivel": 3,
+      "fecha_contrato": "2015-10-19"
+    },
+    {
+      "id_emp": "115",
+      "nombre": "Alberto Sánchez",
+      "nivel": 1,
+      "fecha_contrato": "2024-07-13"
+    }
+  ],
+  "tipos_incidentes": [
+    {
+      "id_inci": "1",
+      "nombre": "Infecciones por código malicioso"
+    },
+    {
+      "id_inci": "2",
+      "nombre": "Intrusiones o intentos de intrusión"
+    },
+    {
+      "id_inci": "3",
+      "nombre": "Fallos de disponibilidad"
+    },
+    {
+      "id_inci": "4",
+      "nombre": "Compromiso de la información"
+    },
+    {
+      "id_inci": "5",
+      "nombre": "Fraude"
+    }
+  ]
+}
