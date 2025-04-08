@@ -109,11 +109,11 @@ def res_ej3():
         published = vuln.get("published")
         modified = vuln.get("modified")
         if published:
-            published_datetime = datetime.fromisoformat(published.replace("Z", "+00:00"))
+            published_datetime = datetime.fromisoformat(published)
             madrid = ZoneInfo("Europe/Madrid")
             published = published_datetime.astimezone(madrid).strftime("%d-%m-%Y %H:%M:%S")
         if modified:
-            modified_datetime = datetime.fromisoformat(modified.replace("Z", "+00:00"))
+            modified_datetime = datetime.fromisoformat(modified)
             madrid = ZoneInfo("Europe/Madrid")
             modified = modified_datetime.astimezone(madrid).strftime("%d-%m-%Y %H:%M:%S")
 
