@@ -1,7 +1,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import sqlite3
 import pandas as pd
 import requests
@@ -29,7 +29,7 @@ def get_df():
 
     return df
 
-def res_ej1():
+def res_ej1(opcion = 'clientes'):
     df = get_df()
     print(df.to_string())
     top_clientes = df.groupby('cliente').size().sort_values(ascending=False).head(5)
@@ -41,14 +41,21 @@ def res_ej1():
     top_incidencias = df.groupby('tipo_incidencia')['tiempo_resolucion'].mean().sort_values(ascending=False).head(5)
     top_incidencias = top_incidencias.to_frame().to_html()
 
+    if opcion == 'empleados':
+        top_empleados = df.groupby('empleado')['tiempo_resolucion'].mean().sort_values(ascending=False).head(5)
+        top_empleados = top_empleados.to_frame().to_html()
+    else:
+        top_empleados = None
+
     results = {
         "top_clientes": top_clientes,
-        "top_incidencias": top_incidencias
+        "top_incidencias": top_incidencias,
+        "top_empleados": top_empleados
     }
 
     return results
 
-def res_ej2():
+def res_ej3():
     api = "https://cve.circl.lu/api/last"
     response = requests.get(api)
     data = response.json()
@@ -134,15 +141,22 @@ def res_ej4API():
 def home():
     return render_template('home.html')
 
-@app.route('/ej1')
+@app.route('/ej1', methods=['GET'])
 def ej1():
-    res = res_ej1()
+    opcion_empleados = request.args.get('opcion_empleados', '0') #por defecto top_clientes
+
+    if opcion_empleados == '1':
+        opcion = 'empleados'
+    else:
+        opcion = 'clientes'
+
+    res = res_ej1(opcion)
     return render_template('ej1.html', res=res)
 
-@app.route('/ej2')
+@app.route('/ej3')
 def ej2():
-    res = res_ej2()
-    return render_template('ej2.html', res=res)
+    res = res_ej3()
+    return render_template('ej3.html', res=res)
 
 @app.route('/ej4API')
 def ej4API():

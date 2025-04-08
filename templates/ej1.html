@@ -3,11 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Ej1</title>
+
+    <script>
+        //función para mostrar u ocultar la sección de empleados según el estado del checkbox
+        function toggleEmpleados() {
+            var checkbox = document.getElementById("opcion_empleados");
+            var empleadosSection = document.getElementById("empleados-section");
+
+            if (checkbox.checked) {
+                empleadosSection.style.display = "block";  //mostrar los datos de los empleados
+            } else {
+                empleadosSection.style.display = "none";   //ocultar los datos de los empleados
+            }
+        }
+    </script>
+
 </head>
 <body>
 <h1>Top Clientes con más incidencias</h1>
 {{ res.top_clientes | safe }}
+
 <h1>Top tipos de incidencias que han requerido mayor tiempo de resolución</h1>
 {{ res.top_incidencias | safe }}
+
+<form action="/ej1" method="get">
+        <label for="opcion_empleados">Mostrar empleados que más tiempo han empleado en la resolución de incidentes</label>
+        <input type="checkbox" id="opcion_empleados" name="opcion_empleados" value="1">
+        <button type="submit">Filtrar</button>
+</form>
+
+{% if res.top_empleados is not none %}
+<h1>Top empleados que más tiempo han empleado en la resolución de incidentes</h1>
+{{ res.top_empleados | safe }}
+{% endif %}
+
 </body>
 </html>
