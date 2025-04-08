@@ -154,7 +154,7 @@ def ej1():
     return render_template('ej1.html', res=res)
 
 @app.route('/ej3')
-def ej2():
+def ej3():
     res = res_ej3()
     return render_template('ej3.html', res=res)
 
