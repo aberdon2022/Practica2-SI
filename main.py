@@ -2,7 +2,7 @@ import os.path
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from flask import Flask, render_template, request, send_file, redirect, url_for, flash
+from flask import Flask, render_template, request, send_file, redirect, url_for, flash, session
 import sqlite3
 import pandas as pd
 import requests
@@ -95,56 +95,42 @@ def res_ej3():
 
     filtered = []
     for cve in data:
-        if cve.get("containers") and cve.get("cveMetadata"):
+        if cve.get("details"):
             filtered.append(cve)
 
     top10 = filtered[:10]
     aux = []
 
     for vuln in top10:
-        cve_id = vuln.get("cveMetadata").get("cveId")
+        cve_id = vuln.get("aliases")[0]
 
-        cna = vuln.get("containers").get("cna")
-        descriptions = cna.get("descriptions")
+        details = vuln.get("details")
 
-        if descriptions:
-            details = []
-            for desc in descriptions:
-                if "value" in desc:
-                    details.append(desc["value"])
-            details = ", ".join(details)
-
-        published = vuln.get("cveMetadata").get("datePublished")
-        updated = vuln.get("cveMetadata").get("dateUpdated")
-
+        published = vuln.get("published")
+        modified = vuln.get("modified")
         if published:
-            published_datetime = datetime.fromisoformat(published)
-            Madrid = ZoneInfo("Europe/Madrid")
-            published = published_datetime.astimezone(Madrid).strftime("%d-%m-%Y %H:%M:%S")
-        if updated:
-            updated_datetime = datetime.fromisoformat(updated)
-            Madrid = ZoneInfo("Europe/Madrid")
-            updated = updated_datetime.astimezone(Madrid).strftime("%d-%m-%Y %H:%M:%S")
+            published_datetime = datetime.fromisoformat(published.replace("Z", "+00:00"))
+            madrid = ZoneInfo("Europe/Madrid")
+            published = published_datetime.astimezone(madrid).strftime("%d-%m-%Y %H:%M:%S")
+        if modified:
+            modified_datetime = datetime.fromisoformat(modified.replace("Z", "+00:00"))
+            madrid = ZoneInfo("Europe/Madrid")
+            modified = modified_datetime.astimezone(madrid).strftime("%d-%m-%Y %H:%M:%S")
 
-        refs = cna.get("references")
-
+        refs = vuln.get("references")
         if refs:
-            urls = []
-            for ref in refs:
-                if "url" in ref:
-                    urls.append(ref["url"])
+            urls = [ref.get("url") for ref in refs if ref.get("url")]
             refs = ", ".join(urls)
 
         aux.append({
             "CVE ID": cve_id,
             "Details": details,
             "Published Date": published,
-            "Date Updated": updated,
+            "Modified Date": modified,
             "References": refs
         })
 
-    dfCVE = pd.DataFrame(aux)
-    return dfCVE.to_html()
+    return pd.DataFrame(aux).to_html()
 
 def res_ej4API():
     top_stories_url = 'https://hacker-news.firebaseio.com/v0/topstories.json'
@@ -292,11 +278,11 @@ def ej1():
     opcion_empleados = request.args.get('opcion_empleados', '0')  # Por defecto, top_clientes
 
     if opcion_empleados == '1':
-        opcion = 'empleados'
+        session['opcion'] = 'empleados'
     else:
-        opcion = 'clientes'
+        session.setdefault('opcion', 'clientes')
 
-    res = res_ej1(opcion)
+    res = res_ej1(session['opcion'])
 
     if request.method == 'POST' and 'ej4PDF' in request.form:
         ej4PDF(res)
