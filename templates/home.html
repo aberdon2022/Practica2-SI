@@ -10,6 +10,9 @@
         <h1>Práctica 2: Representación de los datos</h1>
         <button type="button" class="btn" onclick="location.href='{{ url_for('register') }}'">Register</button>
         <button type="button" class="btn" onclick="location.href='{{ url_for('login') }}'">Login</button>
+        {% if current_user.is_authenticated %}
+        <button type="button" class="btn" onclick="location.href='{{ url_for('profile') }}'">Perfil</button>
+        {% endif %}
     </div>
 </body>
 </html>

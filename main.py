@@ -247,11 +247,11 @@ def ej4PDF(res, filename="informe.pdf"):
 def home():
     return render_template('home.html')
 
-@app.route('/welcome')
+@app.route('/profile')
 @login_required
-def welcome():
+def profile():
     if current_user.is_authenticated:
-        return render_template('welcome.html', username=current_user.username)
+        return render_template('profile.html', username=current_user.username)
     return redirect(url_for('home'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -266,7 +266,7 @@ def login():
         if user is None or not user.check_password(form.password.data):
             return redirect(url_for('login'))
         login_user(user)
-        return redirect(url_for('welcome'))
+        return redirect(url_for('profile'))
     return render_template('login.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -289,7 +289,7 @@ def logout():
         logout_user()
     return redirect(url_for('home'))
 
-@app.route('/ej1')
+@app.route('/ej1', methods=['GET', 'POST'])
 @login_required
 def ej1():
     opcion_empleados = request.args.get('opcion_empleados', '0')  # Por defecto, top_clientes
