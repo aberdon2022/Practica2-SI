@@ -1,10 +1,13 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import sqlite3
 import pandas as pd
 import requests
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+
 app = Flask(__name__)
 
 def get_df():
@@ -33,24 +36,32 @@ def res_ej1(opcion = 'clientes'):
     df = get_df()
     print(df.to_string())
     top_clientes = df.groupby('cliente').size().sort_values(ascending=False).head(5)
-    top_clientes = top_clientes.to_frame().to_html()
+    top_clientes_html = top_clientes.to_frame().to_html()
 
     # Dias en resolverse
     df['tiempo_resolucion'] = (df['fecha_c'] - df['fecha_a']).dt.total_seconds() / 86400
 
     top_incidencias = df.groupby('tipo_incidencia')['tiempo_resolucion'].mean().sort_values(ascending=False).head(5)
-    top_incidencias = top_incidencias.to_frame().to_html()
+    top_incidencias_html = top_incidencias.to_frame().to_html()
 
+    top_empleados = None
+    top_empleados_html = None
     if opcion == 'empleados':
         top_empleados = df.groupby('empleado')['tiempo_resolucion'].mean().sort_values(ascending=False).head(5)
-        top_empleados = top_empleados.to_frame().to_html()
-    else:
-        top_empleados = None
+        top_empleados_html = top_empleados.to_frame().to_html()
+
+    #dataFrames a texto plano para el PDF
+    top_clientes_text = top_clientes.to_string(index=True)
+    top_incidencias_text = top_incidencias.to_string(index=True)
+    top_empleados_text = top_empleados.to_string(index=True) if top_empleados is not None else None
 
     results = {
-        "top_clientes": top_clientes,
-        "top_incidencias": top_incidencias,
-        "top_empleados": top_empleados
+        "top_clientes_html": top_clientes_html,
+        "top_incidencias_html": top_incidencias_html,
+        "top_empleados_html": top_empleados_html,
+        "top_clientes_text": top_clientes_text,
+        "top_incidencias_text": top_incidencias_text,
+        "top_empleados_text": top_empleados_text
     }
 
     return results
@@ -137,13 +148,85 @@ def res_ej4API():
 
     return stories
 
+
+def ej4PDF(res, filename="informe.pdf"):
+    from reportlab.lib.pagesizes import letter
+    from reportlab.pdfgen import canvas
+
+    c = canvas.Canvas(filename, pagesize=letter)
+    width, height = letter  # Tamaño de página A4
+    y_position = height - 40  # Comienza cerca de la parte superior de la página
+
+    # Título del documento
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(40, y_position, "Informe de Incidencias")
+    y_position -= 30
+
+    # Top Clientes
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(40, y_position, "Top Clientes con más Incidencias")
+    y_position -= 20
+
+    # Escribir los datos de top_clientes_text (convertirlo en líneas)
+    c.setFont("Helvetica", 10)
+    top_clientes_lines = res["top_clientes_text"].split("\n")
+    for line in top_clientes_lines:
+        c.drawString(40, y_position, line)
+        y_position -= 12  # Decrementar para la siguiente línea
+        if y_position < 40:  # Si llegamos al final de la página
+            c.showPage()  # Crear una nueva página
+            c.setFont("Helvetica", 10)
+            y_position = height - 40  # Reiniciar la posición
+
+    y_position -= 20
+
+    # Top Tipos de Incidencias
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(40, y_position, "Top Tipos de Incidencias con Mayor Tiempo de Resolución")
+    y_position -= 20
+
+    # Escribir los datos de top_incidencias_text (convertirlo en líneas)
+    c.setFont("Helvetica", 10)
+    top_incidencias_lines = res["top_incidencias_text"].split("\n")
+    for line in top_incidencias_lines:
+        c.drawString(40, y_position, line)
+        y_position -= 12  # Decrementar para la siguiente línea
+        if y_position < 40:  # Si llegamos al final de la página
+            c.showPage()  # Crear una nueva página
+            c.setFont("Helvetica", 10)
+            y_position = height - 40  # Reiniciar la posición
+
+    y_position -= 20
+
+    # Top Empleados (si existe)
+    if res["top_empleados_html"]:
+        c.setFont("Helvetica-Bold", 12)
+        c.drawString(40, y_position, "Top Empleados con Mayor Tiempo de Resolución de Incidencias")
+        y_position -= 20
+
+        # Escribir los datos de top_empleados_text (convertirlo en líneas)
+        c.setFont("Helvetica", 10)
+        top_empleados_lines = res["top_empleados_text"].split("\n")
+        for line in top_empleados_lines:
+            c.drawString(40, y_position, line)
+            y_position -= 12  # Decrementar para la siguiente línea
+            if y_position < 40:  # Si llegamos al final de la página
+                c.showPage()  # Crear una nueva página
+                c.setFont("Helvetica", 10)
+                y_position = height - 40  # Reiniciar la posición
+
+    # Guardar el PDF
+    c.save()
+
+    print(f"PDF generado: {filename}")
+
 @app.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/ej1', methods=['GET'])
+@app.route('/ej1', methods=['GET', 'POST'])
 def ej1():
-    opcion_empleados = request.args.get('opcion_empleados', '0') #por defecto top_clientes
+    opcion_empleados = request.args.get('opcion_empleados', '0')  # Por defecto, top_clientes
 
     if opcion_empleados == '1':
         opcion = 'empleados'
@@ -151,6 +234,11 @@ def ej1():
         opcion = 'clientes'
 
     res = res_ej1(opcion)
+
+    if request.method == 'POST' and 'ej4PDF' in request.form:
+        ej4PDF(res)
+        return send_file("informe.pdf", as_attachment=True)
+
     return render_template('ej1.html', res=res)
 
 @app.route('/ej3')

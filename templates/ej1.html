@@ -21,10 +21,10 @@
 </head>
 <body>
 <h1>Top Clientes con más incidencias</h1>
-{{ res.top_clientes | safe }}
+{{ res.top_clientes_html | safe }}
 
 <h1>Top tipos de incidencias que han requerido mayor tiempo de resolución</h1>
-{{ res.top_incidencias | safe }}
+{{ res.top_incidencias_html | safe }}
 
 <form action="/ej1" method="get">
         <label for="opcion_empleados">Mostrar empleados que más tiempo han empleado en la resolución de incidentes</label>
@@ -32,10 +32,14 @@
         <button type="submit">Filtrar</button>
 </form>
 
-{% if res.top_empleados is not none %}
+{% if res.top_empleados_html is not none %}
 <h1>Top empleados que más tiempo han empleado en la resolución de incidentes</h1>
-{{ res.top_empleados | safe }}
+{{ res.top_empleados_html | safe }}
 {% endif %}
+
+<form action="/ej1" method="post">
+    <button type="submit" name="ej4PDF">Generar Informe PDF</button>
+</form>
 
 </body>
 </html>
