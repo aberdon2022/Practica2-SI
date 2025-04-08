@@ -1,6 +1,10 @@
-from flask import Flask, render_template, abort
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+from flask import Flask, render_template
 import sqlite3
 import pandas as pd
+import requests
 app = Flask(__name__)
 
 def get_df():
@@ -44,6 +48,64 @@ def res_ej1():
 
     return results
 
+def res_ej2():
+    api = "https://cve.circl.lu/api/last"
+    response = requests.get(api)
+    data = response.json()
+
+    filtered = []
+    for cve in data:
+        if cve.get("containers") and cve.get("cveMetadata"):
+            filtered.append(cve)
+
+    top10 = filtered[:10]
+    aux = []
+
+    for vuln in top10:
+        cve_id = vuln.get("cveMetadata").get("cveId")
+
+        cna = vuln.get("containers").get("cna")
+        descriptions = cna.get("descriptions")
+
+        if descriptions:
+            details = []
+            for desc in descriptions:
+                if "value" in desc:
+                    details.append(desc["value"])
+            details = ", ".join(details)
+
+        published = vuln.get("cveMetadata").get("datePublished")
+        updated = vuln.get("cveMetadata").get("dateUpdated")
+
+        if published:
+            published_datetime = datetime.fromisoformat(published)
+            Madrid = ZoneInfo("Europe/Madrid")
+            published = published_datetime.astimezone(Madrid).strftime("%d-%m-%Y %H:%M:%S")
+        if updated:
+            updated_datetime = datetime.fromisoformat(updated)
+            Madrid = ZoneInfo("Europe/Madrid")
+            updated = updated_datetime.astimezone(Madrid).strftime("%d-%m-%Y %H:%M:%S")
+
+        refs = cna.get("references")
+
+        if refs:
+            urls = []
+            for ref in refs:
+                if "url" in ref:
+                    urls.append(ref["url"])
+            refs = ", ".join(urls)
+
+        aux.append({
+            "CVE ID": cve_id,
+            "Details": details,
+            "Published Date": published,
+            "Date Updated": updated,
+            "References": refs
+        })
+
+    dfCVE = pd.DataFrame(aux)
+    return dfCVE.to_html()
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -52,6 +114,11 @@ def home():
 def ej1():
     res = res_ej1()
     return render_template('ej1.html', res=res)
+
+@app.route('/ej2')
+def ej2():
+    res = res_ej2()
+    return render_template('ej2.html', res=res)
 
 if __name__ == '__main__':
     app.run(port=8080)
