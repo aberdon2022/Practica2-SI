@@ -106,6 +106,30 @@ def res_ej2():
     dfCVE = pd.DataFrame(aux)
     return dfCVE.to_html()
 
+def res_ej4API():
+    top_stories_url = 'https://hacker-news.firebaseio.com/v0/topstories.json'
+    response = requests.get(top_stories_url)
+    story_ids = response.json()
+
+    if not story_ids:
+        return None
+
+    #primeros 10 IDs
+    top_story_ids = story_ids[:10]
+
+    #pedimos los datos de esas noticias
+    stories = []
+
+    for story_id in top_story_ids:
+        story_url = f'https://hacker-news.firebaseio.com/v0/item/{story_id}.json'
+        story_response = requests.get(story_url)
+        story_data = story_response.json()
+
+        if story_data:  # nos aseguramos de que haya datos
+            stories.append(story_data)
+
+    return stories
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -119,6 +143,11 @@ def ej1():
 def ej2():
     res = res_ej2()
     return render_template('ej2.html', res=res)
+
+@app.route('/ej4API')
+def ej4API():
+    stories = res_ej4API()  # Llamamos a la función
+    return render_template('ej4API.html', stories=stories)
 
 if __name__ == '__main__':
     app.run(port=8080)

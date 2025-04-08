@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 10 Noticias de Hacker News</title>
+</head>
+<body>
+    <h1>Top 10 Noticias de Hacker News</h1>
+    <ul>
+        {% for story in stories %}
+            <li>
+                {% if story.url %}
+                    <a href="{{ story.url }}" target="_blank">{{ story.title }}</a>
+                {% else %}
+                    {{ story.title }} (sin enlace)
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <br><br>
+</body>
+</html>
