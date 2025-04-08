@@ -1,5 +1,4 @@
 import os.path
-import sqlite3
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -173,8 +172,6 @@ def res_ej4API():
 
 
 def ej4PDF(res, filename="informe.pdf"):
-    from reportlab.lib.pagesizes import letter
-    from reportlab.pdfgen import canvas
 
     c = canvas.Canvas(filename, pagesize=letter)
     width, height = letter  # Tamaño de página A4
