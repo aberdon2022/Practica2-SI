@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Práctica 2: Representación de los datos</title>
-    <link rel="stylesheet" href = "{{ url_for('static', filename = 'css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="center">
         <h1>Práctica 2: Representación de los datos</h1>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('register') }}'">Register</button>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('login') }}'">Login</button>
     </div>
 </body>
 </html>

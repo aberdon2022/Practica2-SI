@@ -1,14 +1,37 @@
+import os.path
+import sqlite3
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, redirect, url_for, flash
 import sqlite3
 import pandas as pd
 import requests
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
+import sqlalchemy as sa
+from flask_login import current_user, login_user, logout_user, login_required
+
+from extensions import db, login
+from forms import LoginForm, RegisterForm
+from models import User
+
 app = Flask(__name__)
+dir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(dir, 'bdPractica2.db')}"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = os.urandom(24).hex()
+login.init_app(app)
+db.init_app(app)
+
+with app.app_context():
+    inspector = sa.inspect(db.engine)
+    if not inspector.has_table("Usuarios"):
+        db.create_all()
+        print("Tabla Usuarios creada en bdPractica2.db")
+    else:
+        print("La tabla Usuarios ya existe en bdPractica2.db")
 
 def get_df():
     con = sqlite3.connect('bdPractica2.db')
@@ -224,7 +247,50 @@ def ej4PDF(res, filename="informe.pdf"):
 def home():
     return render_template('home.html')
 
-@app.route('/ej1', methods=['GET', 'POST'])
+@app.route('/welcome')
+@login_required
+def welcome():
+    if current_user.is_authenticated:
+        return render_template('welcome.html', username=current_user.username)
+    return redirect(url_for('home'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = db.session.scalar(
+            sa.select(User).where(User.username == form.username.data)
+        )
+        if user is None or not user.check_password(form.password.data):
+            return redirect(url_for('login'))
+        login_user(user)
+        return redirect(url_for('welcome'))
+    return render_template('login.html', form=form)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        logout_user()
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, password=form.password.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Usuario registrado correctamente')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
+
+@app.route('/logout')
+def logout():
+    if current_user.is_authenticated:
+        logout_user()
+    return redirect(url_for('home'))
+
+@app.route('/ej1')
+@login_required
 def ej1():
     opcion_empleados = request.args.get('opcion_empleados', '0')  # Por defecto, top_clientes
 
@@ -242,6 +308,7 @@ def ej1():
     return render_template('ej1.html', res=res)
 
 @app.route('/ej3')
+@login_required
 def ej3():
     res = res_ej3()
     return render_template('ej3.html', res=res)
