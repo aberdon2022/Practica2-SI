@@ -16,6 +16,16 @@ from extensions import db, login
 from forms import LoginForm, RegisterForm
 from models import User
 
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import export_graphviz
+from sklearn import tree
+from sklearn.model_selection import train_test_split
+import json
+import graphviz
+
 app = Flask(__name__)
 dir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(dir, 'bdPractica2.db')}"
@@ -36,7 +46,8 @@ def get_df():
     con = sqlite3.connect('bdPractica2.db')
     sql = """SELECT t.id AS ticket_id, t.fecha_apertura AS fecha_a, t.fecha_cierre AS fecha_c, 
            t.es_mantenimiento, 
-           t.satisfaccion_cliente, t.tipo_incidencia_id, t.es_critico, c.nombre as cliente, c.telefono, c.provincia,
+           t.satisfaccion_cliente, t.tipo_incidencia_id, t.es_critico, 
+           c.id AS cliente_id, c.nombre as cliente, c.telefono, c.provincia,
            ti.nombre as tipo_incidencia, cet.fecha AS fecha_atencion_ticket, cet.tiempo, 
            e.nombre as empleado, e.nivel AS nivel_empleado, e.fecha_contrato AS fecha_contrato_empleado
            FROM tickets t
@@ -226,6 +237,142 @@ def ej4PDF(res, filename="informe.pdf"):
 
     print(f"PDF generado: {filename}")
 
+def procesar_datos():
+    with open("data_clasified.json", "r") as f:
+        data = json.load(f)
+
+    tickets = data.get("tickets_emitidos", [])
+
+    processed = []
+    for ticket in tickets:
+        processed.append({
+            "cliente_id": ticket.get("cliente"),
+            "fecha_apertura": pd.to_datetime(ticket.get("fecha_apertura")).timestamp(),
+            "fecha_cierre": pd.to_datetime(ticket.get("fecha_cierre")).timestamp(),
+            "es_mantenimiento": int(ticket.get("es_mantenimiento")),
+            "tipo_incidencia": ticket.get("tipo_incidencia"),
+            "es_critico": int(ticket.get("es_critico"))
+        })
+
+    df = pd.DataFrame(processed)
+
+    x = df[['cliente_id', 'fecha_apertura', 'fecha_cierre', 'es_mantenimiento', 'tipo_incidencia']]
+    y = df['es_critico']
+
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+    return x_train, x_test, y_train, y_test, x
+
+def modelo_arbol(entrada_nueva):
+    x_train, x_test, y_train, y_test, x = procesar_datos()
+
+    clf = tree.DecisionTreeClassifier()
+    clf.fit(x_train, y_train)
+
+    pred = clf.predict(entrada_nueva)[0]
+    es_critico = bool(pred)
+
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    nombre_archivo = f"arbol_{timestamp}"
+    ruta_imagen = f"{nombre_archivo}.png"
+
+    dot_data = tree.export_graphviz(
+        clf,
+        out_file=None,
+        feature_names=x.columns,
+        class_names=["No Crítico", "Crítico"],
+        filled=True,
+        rounded=True,
+        special_characters=True
+    )
+    graph = graphviz.Source(dot_data)
+    graph.render(filename=nombre_archivo, directory="static", format="png", cleanup=True)
+
+    return es_critico, ruta_imagen
+
+
+def modelo_random_forest(entrada_nueva):
+    x_train, x_test, y_train, y_test, x = procesar_datos()
+
+    clf = RandomForestClassifier(max_depth=3, random_state=0, n_estimators=5)
+    clf.fit(x_train, y_train)
+
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    imagenes = []
+
+    for i, estimator in enumerate(clf.estimators_):
+        nombre_archivo = f"rf_tree_{i}_{timestamp}"
+        ruta_imagen = f"{nombre_archivo}.png"
+
+        dot_data = export_graphviz(
+            estimator,
+            out_file=None,
+            feature_names=x.columns,
+            class_names=["No Crítico", "Crítico"],
+            rounded=True,
+            proportion=False,
+            precision=2,
+            filled=True
+        )
+
+        graph = graphviz.Source(dot_data)
+        graph.render(filename=nombre_archivo, directory="static", format="png", cleanup=True)
+        imagenes.append(ruta_imagen)
+
+    pred = clf.predict(entrada_nueva)[0]
+    es_critico = bool(pred)
+
+    return es_critico, imagenes
+
+
+def modelo_lineal(entrada_nueva):
+    x_train, x_test, y_train, y_test, x = procesar_datos()
+
+    modelo = linear_model.LinearRegression()
+    modelo.fit(x_train, y_train)
+
+    y_pred = modelo.predict(x_test)
+
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    ruta_imagen = f"roc_curve_{timestamp}.png"
+    ruta_completa = f"static/{ruta_imagen}"
+
+    plt.figure(figsize=(8, 6))
+    plt.scatter(range(len(y_test)), y_test, color="black", label="Datos Reales", alpha=0.6)
+    plt.scatter(range(len(y_pred)), y_pred, color="blue", label="Predicciones", alpha=0.6, linewidth=3)
+    plt.yticks([0, 1])
+    plt.legend()
+    plt.savefig(ruta_completa)
+    plt.close()
+
+    pred = modelo.predict(entrada_nueva)[0]
+    es_critico = pred >= 0.5
+
+    return bool(es_critico), ruta_imagen
+
+
+def res_ej5(form):
+    cliente_id = int(form.get('cliente'))
+    fecha_apertura = form.get('fecha_apertura')
+    fecha_cierre = form.get('fecha_cierre')
+    es_mantenimiento = int(form.get('es_mantenimiento'))
+    tipo_incidencia = int(form.get('tipo_incidencia'))
+
+    fecha_apertura = pd.to_datetime(fecha_apertura).timestamp()
+    fecha_cierre = pd.to_datetime(fecha_cierre).timestamp()
+
+    datos = np.array([[cliente_id, fecha_apertura, fecha_cierre, es_mantenimiento, tipo_incidencia]])
+
+    modelo = form.get('modelo')
+    if modelo == "lineal":
+        return modelo_lineal(datos)
+    elif modelo == "arbol":
+        return modelo_arbol(datos)
+    elif modelo == "bosque":
+        return modelo_random_forest(datos)
+    else:
+        return False, ""
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -300,6 +447,20 @@ def ej3():
 def ej4API():
     stories = res_ej4API()  # Llamamos a la función
     return render_template('ej4API.html', stories=stories)
+
+@app.route('/ej5', methods=['GET', 'POST'])
+def ej5():
+    df = get_df()
+
+    clientes_list = df[['cliente_id', 'cliente']].drop_duplicates().values.tolist()
+    tipos_list = df[['tipo_incidencia_id', 'tipo_incidencia']].drop_duplicates().values.tolist()
+
+    if request.method == 'POST':
+        resultado, grafica_path = res_ej5(request.form)
+        return render_template('ej5.html', resultado=resultado, grafica=grafica_path, clientes=clientes_list, tipos=tipos_list)
+    else:
+        return render_template('ej5.html', clientes=clientes_list, tipos=tipos_list)
+
 
 if __name__ == '__main__':
     app.run(port=8080)

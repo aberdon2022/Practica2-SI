@@ -1,0 +1,26 @@
+.result-container {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.critical {
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+}
+
+.non-critical {
+    background-color: #d1e7dd;
+    border: 1px solid #badbcc;
+}
+
+.img-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.img-prediccion {
+    max-width: 100%;
+    object-fit: contain;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
