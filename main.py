@@ -444,11 +444,13 @@ def ej3():
     return render_template('ej3.html', res=res)
 
 @app.route('/ej4API')
+@login_required
 def ej4API():
     stories = res_ej4API()  # Llamamos a la función
     return render_template('ej4API.html', stories=stories)
 
 @app.route('/ej5', methods=['GET', 'POST'])
+@login_required
 def ej5():
     df = get_df()
 
