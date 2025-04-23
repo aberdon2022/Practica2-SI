@@ -31,3 +31,18 @@ th {
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+

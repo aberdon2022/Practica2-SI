@@ -3,6 +3,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from flask import Flask, render_template, request, send_file, redirect, url_for, flash, session
+from wtforms import ValidationError
 import sqlite3
 import pandas as pd
 import requests
@@ -392,8 +393,6 @@ def login():
         user = db.session.scalar(
             sa.select(User).where(User.username == form.username.data)
         )
-        if user is None or not user.check_password(form.password.data):
-            return redirect(url_for('login'))
         login_user(user)
         return redirect(url_for('profile'))
     return render_template('login.html', form=form)
@@ -408,7 +407,6 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Usuario registrado correctamente')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 

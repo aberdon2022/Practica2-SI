@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
 </head>
 <body>
     <h1>Register</h1>
@@ -11,6 +12,9 @@
         <p>
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
         </p>
         <p>
             {{ form.password.label }}<br>

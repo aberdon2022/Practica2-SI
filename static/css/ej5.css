@@ -24,3 +24,17 @@
     object-fit: contain;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
