@@ -61,7 +61,6 @@ def get_df():
 
     df['fecha_a'] = pd.to_datetime(df['fecha_a'])
     df['fecha_c'] = pd.to_datetime(df['fecha_c'])
-    df['dia'] = df['fecha_a'].dt.day_name()
 
     return df
 
