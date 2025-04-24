@@ -38,3 +38,9 @@ button {
 button:hover {
     background-color: #2980b9;
 }
+
+.volver-perfil {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -26,6 +26,7 @@ from sklearn import tree
 from sklearn.model_selection import train_test_split
 import json
 import graphviz
+from sklearn.decomposition import PCA
 
 app = Flask(__name__)
 dir = os.path.abspath(os.path.dirname(__file__))
@@ -328,24 +329,29 @@ def modelo_random_forest(entrada_nueva):
 def modelo_lineal(entrada_nueva):
     x_train, x_test, y_train, y_test, x = procesar_datos()
 
-    modelo = linear_model.LinearRegression()
-    modelo.fit(x_train, y_train)
+    pca = PCA(n_components=1)
+    x_train_pca = pca.fit_transform(x_train)
+    x_test_pca = pca.transform(x_test)
+    entrada_nueva_pca = pca.transform(entrada_nueva)
 
-    y_pred = modelo.predict(x_test)
+    modelo = linear_model.LinearRegression()
+    modelo.fit(x_train_pca, y_train)
+
+    y_pred = modelo.predict(x_test_pca)
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    ruta_imagen = f"roc_curve_{timestamp}.png"
+    ruta_imagen = f"lineal_{timestamp}.png"
     ruta_completa = f"static/{ruta_imagen}"
 
     plt.figure(figsize=(8, 6))
-    plt.scatter(range(len(y_test)), y_test, color="black", label="Datos Reales", alpha=0.6)
-    plt.scatter(range(len(y_pred)), y_pred, color="blue", label="Predicciones", alpha=0.6, linewidth=3)
-    plt.yticks([0, 1])
+    plt.scatter(x_test_pca, y_test, color="black", label="Real")
+    plt.plot(x_test_pca, y_pred, color="blue", linewidth=2, label="Predicho")
     plt.legend()
+    plt.grid(True)
     plt.savefig(ruta_completa)
     plt.close()
 
-    pred = modelo.predict(entrada_nueva)[0]
+    pred = modelo.predict(entrada_nueva_pca)[0]
     es_critico = pred >= 0.5
 
     return bool(es_critico), ruta_imagen
