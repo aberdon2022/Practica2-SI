@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ej3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ej3.css') }}">
+</head>
+<body>
+<h1>Top 10 Vulnerabilidades En Tiempo Real</h1>
+{{ res | safe }}
+<a href="{{ url_for('profile') }}"><button>Volver al Perfil</button></a>
+</body>
+</html>

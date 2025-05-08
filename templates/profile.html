@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="center">
+        <h1>Bienvenido al CMI: {{ current_user.username }}</h1>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('home') }}'">Home</button>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('ej1') }}'">Ejercicio 2</button>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('ej3') }}'">Ejercicio 3</button>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('ej4API') }}'">Ejercicio 4</button>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('ej5') }}'">Ejercicio 5</button>
+        <button type="button" class="btn" onclick="location.href='{{ url_for('logout') }}'">Logout</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Títulos */
+h1 {
+    color: #2c3e50;
+    font-size: 24px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    margin-top: 40px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Formularios */
+form {
+    margin: 20px auto;            /* Centrado */
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: fit-content;                   /* Ocupa un 80% del ancho */
+    max-width: 600px;             /* Pero no más de 600px */
+}
+
+/* Etiquetas y entradas */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Sección oculta por JavaScript */
+#empleados-section {
+    display: none;
+}
+
+/* Estilos para tablas */
+table {
+    width: 80%;              /* Ocupa el 80% del contenedor */
+    max-width: 900px;        /* Pero no más de 900px */
+    margin: 20px auto;       /* Centrado horizontalmente y separación arriba */
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

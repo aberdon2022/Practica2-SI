@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ej1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ej1.css') }}">
+</head>
+<body>
+<h1>Top Clientes con más incidencias</h1>
+{{ res.top_clientes_html | safe }}
+
+<h1>Top tipos de incidencias que han requerido mayor tiempo de resolución</h1>
+{{ res.top_incidencias_html | safe }}
+
+<form action="/ej1" method="get">
+        <label for="opcion_empleados">Mostrar empleados que más tiempo han empleado en la resolución de incidentes</label>
+        <input type="checkbox" id="opcion_empleados" name="opcion_empleados" value="1">
+        <button type="submit">Filtrar</button>
+</form>
+
+{% if res.top_empleados_html is not none %}
+<h1>Top empleados que más tiempo han empleado en la resolución de incidentes</h1>
+{{ res.top_empleados_html | safe }}
+{% endif %}
+
+<form action="/ej1" method="post">
+    <button type="submit" name="ej4PDF">Generar Informe PDF</button>
+</form>
+<a href="{{ url_for('profile') }}"><button>Volver al Perfil</button></a>
+</body>
+</html>

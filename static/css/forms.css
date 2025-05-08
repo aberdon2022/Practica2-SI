@@ -1,0 +1,49 @@
+body {
+    font-family: Consolas, monospace;
+    background-color: #fafafa;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 500px;
+    margin: 0 auto;
+    border: black 1px solid;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+input[type=\text],
+input[type=\password] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=\submit] {
+    width: 100%;
+    padding: 10px;
+    background-color: cornflowerblue;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type=\submit]:hover {
+    background-color: #357ae8;
+}

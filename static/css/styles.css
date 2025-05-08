@@ -1,0 +1,54 @@
+.center {
+    text-align: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #333;
+}
+
+h1, h2 {
+    color: black;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e6f3ff;
+}
+
+.btn {
+background-color: cornflowerblue;
+    color: black;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 10px; /* Adds horizontal space between buttons */
+}
+.btn:hover {
+    background-color: deepskyblue;
+}

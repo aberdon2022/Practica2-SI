@@ -1,0 +1,48 @@
+/* --- Título --- */
+h1 {
+    color: #2c3e50;
+    font-size: 26px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* --- Tabla (por si res contiene una tabla HTML) --- */
+table {
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
