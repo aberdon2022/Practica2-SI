@@ -66,14 +66,17 @@ def get_df():
 
 def res_ej1(opcion = 'clientes'):
     df = get_df()
-    print(df.to_string())
     top_clientes = df.groupby('cliente').size().sort_values(ascending=False).head(5)
     top_clientes_html = top_clientes.to_frame().to_html()
+    print("Top Clientes con más incidencias\n-------------------------------------------")
+    print(top_clientes)
 
     df['tiempo_resolucion'] = (df['fecha_c'] - df['fecha_a']).dt.total_seconds() / 86400
 
     top_incidencias = df.groupby('tipo_incidencia')['tiempo_resolucion'].mean().sort_values(ascending=False).head(5)
     top_incidencias_html = top_incidencias.to_frame().to_html()
+    print("\nTop tipos de incidencias que han requerido mayor tiempo de resolución\n-------------------------------------------")
+    print(top_incidencias)
 
     top_empleados = None
     top_empleados_html = None
