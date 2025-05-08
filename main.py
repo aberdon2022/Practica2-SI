@@ -71,7 +71,6 @@ def res_ej1(opcion = 'clientes'):
     top_clientes = df.groupby('cliente').size().sort_values(ascending=False).head(5)
     top_clientes_html = top_clientes.to_frame().to_html()
 
-    # Dias en resolverse
     df['tiempo_resolucion'] = (df['fecha_c'] - df['fecha_a']).dt.total_seconds() / 86400
 
     top_incidencias = df.groupby('tipo_incidencia')['tiempo_resolucion'].mean().sort_values(ascending=False).head(5)
@@ -83,7 +82,6 @@ def res_ej1(opcion = 'clientes'):
         top_empleados = df.groupby('empleado')['tiempo_resolucion'].mean().sort_values(ascending=False).head(5)
         top_empleados_html = top_empleados.to_frame().to_html()
 
-    #dataFrames a texto plano para el PDF
     top_clientes_text = top_clientes.to_string(index=True)
     top_incidencias_text = top_incidencias.to_string(index=True)
     top_empleados_text = top_empleados.to_string(index=True) if top_empleados is not None else None
@@ -151,10 +149,8 @@ def res_ej4API():
     if not story_ids:
         return None
 
-    #primeros 10 IDs
     top_story_ids = story_ids[:10]
 
-    #pedimos los datos de esas noticias
     stories = []
 
     for story_id in top_story_ids:
@@ -162,7 +158,7 @@ def res_ej4API():
         story_response = requests.get(story_url)
         story_data = story_response.json()
 
-        if story_data:  # nos aseguramos de que haya datos
+        if story_data:
             stories.append(story_data)
 
     return stories
@@ -171,68 +167,59 @@ def res_ej4API():
 def ej4PDF(res, filename="informe.pdf"):
 
     c = canvas.Canvas(filename, pagesize=letter)
-    width, height = letter  # Tamaño de página A4
-    y_position = height - 40  # Comienza cerca de la parte superior de la página
+    width, height = letter
+    y_position = height - 40
 
-    # Título del documento
     c.setFont("Helvetica-Bold", 16)
     c.drawString(40, y_position, "Informe de Incidencias")
     y_position -= 30
 
-    # Top Clientes
     c.setFont("Helvetica-Bold", 12)
     c.drawString(40, y_position, "Top Clientes con más Incidencias")
     y_position -= 20
 
-    # Escribir los datos de top_clientes_text (convertirlo en líneas)
     c.setFont("Helvetica", 10)
     top_clientes_lines = res["top_clientes_text"].split("\n")
     for line in top_clientes_lines:
         c.drawString(40, y_position, line)
-        y_position -= 12  # Decrementar para la siguiente línea
-        if y_position < 40:  # Si llegamos al final de la página
-            c.showPage()  # Crear una nueva página
+        y_position -= 12
+        if y_position < 40:
+            c.showPage()
             c.setFont("Helvetica", 10)
-            y_position = height - 40  # Reiniciar la posición
+            y_position = height - 40
 
     y_position -= 20
 
-    # Top Tipos de Incidencias
     c.setFont("Helvetica-Bold", 12)
     c.drawString(40, y_position, "Top Tipos de Incidencias con Mayor Tiempo de Resolución")
     y_position -= 20
 
-    # Escribir los datos de top_incidencias_text (convertirlo en líneas)
     c.setFont("Helvetica", 10)
     top_incidencias_lines = res["top_incidencias_text"].split("\n")
     for line in top_incidencias_lines:
         c.drawString(40, y_position, line)
-        y_position -= 12  # Decrementar para la siguiente línea
-        if y_position < 40:  # Si llegamos al final de la página
-            c.showPage()  # Crear una nueva página
+        y_position -= 12
+        if y_position < 40:
+            c.showPage()
             c.setFont("Helvetica", 10)
-            y_position = height - 40  # Reiniciar la posición
+            y_position = height - 40
 
     y_position -= 20
 
-    # Top Empleados (si existe)
     if res["top_empleados_html"]:
         c.setFont("Helvetica-Bold", 12)
         c.drawString(40, y_position, "Top Empleados con Mayor Tiempo de Resolución de Incidencias")
         y_position -= 20
 
-        # Escribir los datos de top_empleados_text (convertirlo en líneas)
         c.setFont("Helvetica", 10)
         top_empleados_lines = res["top_empleados_text"].split("\n")
         for line in top_empleados_lines:
             c.drawString(40, y_position, line)
-            y_position -= 12  # Decrementar para la siguiente línea
-            if y_position < 40:  # Si llegamos al final de la página
-                c.showPage()  # Crear una nueva página
+            y_position -= 12
+            if y_position < 40:
+                c.showPage()
                 c.setFont("Helvetica", 10)
-                y_position = height - 40  # Reiniciar la posición
-
-    # Guardar el PDF
+                y_position = height - 40
     c.save()
 
     print(f"PDF generado: {filename}")
@@ -419,7 +406,7 @@ def logout():
 @app.route('/ej1', methods=['GET', 'POST'])
 @login_required
 def ej1():
-    opcion_empleados = request.args.get('opcion_empleados', '0')  # Por defecto, top_clientes
+    opcion_empleados = request.args.get('opcion_empleados', '0')
 
     if opcion_empleados == '1':
         session['opcion'] = 'empleados'
@@ -443,7 +430,7 @@ def ej3():
 @app.route('/ej4API')
 @login_required
 def ej4API():
-    stories = res_ej4API()  # Llamamos a la función
+    stories = res_ej4API()
     return render_template('ej4API.html', stories=stories)
 
 @app.route('/ej5', methods=['GET', 'POST'])
